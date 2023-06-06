@@ -19,6 +19,10 @@ def chord_progression_to_midi(chord_symbols, note_length, filename):
         
         
         # Generate the notes for the chord
+        
+        #balancing the sound range of chords
+        root_note += "3"
+        
         if chord_type == 'M':
             notes = major_triad(root_note)
         elif chord_type == 'm':
