@@ -1,6 +1,5 @@
-from music21 import chord, stream, note, midi, duration
+from music21 import *
 from chord_map import *
-
 
 def block_chord_progression_to_midi(chord_symbols, note_length, epoch):
     # Create a music21 stream object to hold the notes and chords
@@ -44,6 +43,8 @@ def block_chord_progression_to_midi(chord_symbols, note_length, epoch):
     mf.open(filename, 'wb')
     mf.write()
     mf.close()
+
+
 
 
 

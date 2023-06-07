@@ -1,3 +1,4 @@
+from music21 import *
 from music21.pitch import Pitch
 import random
 
