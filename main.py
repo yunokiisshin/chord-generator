@@ -6,7 +6,7 @@ from chord_map import major_triad, minor_triad, major_seventh, minor_seventh, do
 def chord_progression_to_midi(chord_symbols, note_length, filename):
     # Create a music21 stream object to hold the notes and chords
     music_stream = stream.Stream()
-    for i in range(4):
+    for i in range(８):
         for symbol in chord_symbols:
             # Determine the root note and the type of chord
             root_note = symbol[0]
