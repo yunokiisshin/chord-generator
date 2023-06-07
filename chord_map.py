@@ -26,7 +26,6 @@ def major_triad(root):
 
     # Randomly select a voicing
     voicing = random.choice(voicings)
-    print(voicing)
     return voicing
 
 
@@ -51,9 +50,7 @@ def minor_triad(root):
     
     # Randomly select a voicing
     voicing = random.choice(voicings)
-    print(voicing)
     return voicing
-
 
 
 def major_seventh(root):
@@ -79,8 +76,6 @@ def major_seventh(root):
     
     # Randomly select a voicing
     voicing = random.choice(voicings)
-
-    print(voicing)
     return voicing
 
 
@@ -108,7 +103,6 @@ def minor_seventh(root):
     
     # Randomly select a voicing
     voicing = random.choice(voicings)
-    print(voicing)
     return voicing
 
 
@@ -135,6 +129,4 @@ def dominant_seventh(root):
     
     # Randomly select a voicing
     voicing = random.choice(voicings)
-    print(voicing)
-
     return voicing

@@ -1,12 +1,11 @@
-# basic_bc.py
-
 from music21 import chord, stream, note, midi, duration
-from chord_map import major_triad, minor_triad, major_seventh, minor_seventh, dominant_seventh
+from chord_map import *
 
-def chord_progression_to_midi(chord_symbols, note_length, filename):
+
+def chord_progression_to_midi(chord_symbols, note_length, epoch):
     # Create a music21 stream object to hold the notes and chords
     music_stream = stream.Stream()
-    for i in range(8):
+    for i in range(4):
         for symbol in chord_symbols:
             # Determine the root note and the type of chord
             root_note = symbol[0]
@@ -40,6 +39,7 @@ def chord_progression_to_midi(chord_symbols, note_length, filename):
             music_stream.append(c)
 
     # Once all the chords have been added to the stream, write the stream to a MIDI file
+    filename = f"./result/chord_progression_{epoch}.mid"  # Construct the filename using f-string
     mf = midi.translate.streamToMidiFile(music_stream)
     mf.open(filename, 'wb')
     mf.write()
@@ -49,10 +49,12 @@ def chord_progression_to_midi(chord_symbols, note_length, filename):
 def main():
     # Test with a simple chord progression
     chord_symbols = input("list chord progression: ").split()
+    iter = int(input("How many iterations would you like?: "))
     print(chord_symbols)
-    note_length = 2.0  # Half notes
-    filename = "./result/chord_progression.mid"
-    chord_progression_to_midi(chord_symbols, note_length, filename)
+    note_length = 4.0  # whole notes
+
+    for epoch in range(1, iter+1):  
+        chord_progression_to_midi(chord_symbols, note_length, epoch)
 
 if __name__ == "__main__":
     main()
