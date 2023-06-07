@@ -26,7 +26,10 @@ def major_triad(root):
 
     # Randomly select a voicing
     voicing = random.choice(voicings)
+    print(voicing)
     return voicing
+
+
 
 def minor_triad(root):
     # Define the notes of the chord
@@ -45,6 +48,12 @@ def minor_triad(root):
         [root, fifth, note_shift(third,12), note_shift(fifth,12)]
         # Add more voicings as desired...
     ]
+    
+    # Randomly select a voicing
+    voicing = random.choice(voicings)
+    print(voicing)
+    return voicing
+
 
 
 def major_seventh(root):
@@ -59,9 +68,9 @@ def major_seventh(root):
         [root, third, fifth, seventh],     # root position
         [root, fifth, seventh, note_shift(third,12)], 
         [root, seventh, note_shift(third,12), note_shift(fifth, 12)],  
-        [third, fifth, seventh, root+12],       # first inversion
-        [third, seventh, root+12, note_shift(fifth, 12)],       
-        [third, seventh, root+12, note_shift(fifth, 12)],       
+        [third, fifth, seventh, note_shift(root_note, 12)],       # first inversion
+        [third, seventh, note_shift(root_note, 12), note_shift(fifth, 12)],       
+        [third, seventh, note_shift(root_note, 12), note_shift(fifth, 12)],       
         [note_shift(fifth, -12), note_shift(seventh, -12), root, third],  # second inversion
         [note_shift(fifth, -12), root, third, fifth], 
         [note_shift(seventh, -12), root, third, fifth]
@@ -71,6 +80,7 @@ def major_seventh(root):
     # Randomly select a voicing
     voicing = random.choice(voicings)
 
+    print(voicing)
     return voicing
 
 
@@ -87,9 +97,9 @@ def minor_seventh(root):
         [root, third, fifth, seventh],     # root position
         [root, fifth, seventh, note_shift(third,12)], 
         [root, seventh, note_shift(third,12), note_shift(fifth, 12)],  
-        [third, fifth, seventh, root+12],       # first inversion
-        [third, seventh, root+12, note_shift(fifth, 12)],       
-        [third, seventh, root+12, note_shift(fifth, 12)],       
+        [third, fifth, seventh, note_shift(root_note, 12)],       # first inversion
+        [third, seventh, note_shift(root_note, 12), note_shift(fifth, 12)],       
+        [third, seventh, note_shift(root_note, 12), note_shift(fifth, 12)],       
         [note_shift(fifth, -12), note_shift(seventh, -12), root, third],  # second inversion
         [note_shift(fifth, -12), root, third, fifth], 
         [note_shift(seventh, -12), root, third, fifth]
@@ -98,7 +108,7 @@ def minor_seventh(root):
     
     # Randomly select a voicing
     voicing = random.choice(voicings)
-
+    print(voicing)
     return voicing
 
 
@@ -114,9 +124,9 @@ def dominant_seventh(root):
         [root, third, fifth, seventh],     # root position
         [root, fifth, seventh, note_shift(third,12)], 
         [root, seventh, note_shift(third,12), note_shift(fifth, 12)],  
-        [third, fifth, seventh, root+12],       # first inversion
-        [third, seventh, root+12, note_shift(fifth, 12)],       
-        [third, seventh, root+12, note_shift(fifth, 12)],       
+        [third, fifth, seventh, note_shift(root_note, 12)],       # first inversion
+        [third, seventh, note_shift(root_note, 12), note_shift(fifth, 12)],       
+        [third, seventh, note_shift(root_note, 12), note_shift(fifth, 12)],       
         [note_shift(fifth, -12), note_shift(seventh, -12), root, third],  # second inversion
         [note_shift(fifth, -12), root, third, fifth], 
         [note_shift(seventh, -12), root, third, fifth]
@@ -125,5 +135,6 @@ def dominant_seventh(root):
     
     # Randomly select a voicing
     voicing = random.choice(voicings)
+    print(voicing)
 
     return voicing
