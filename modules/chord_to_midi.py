@@ -3,7 +3,7 @@
 from music21 import *
 from modules.chord_map import *
 
-def block_chords_to_midi(chord_symbols, note_length, epoch):
+def block_chords_to_midi(chord_symbols, note_length, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
     music_stream = stream.Stream()
     for i in range(4):
@@ -24,15 +24,15 @@ def block_chords_to_midi(chord_symbols, note_length, epoch):
             root_note += "3"
             
             if chord_type == 'M':
-                notes = major_triad(root_note)
+                notes = major_triad(root_note,mode) # 0=no specification, 1=with specification
             elif chord_type == 'm':
-                notes = minor_triad(root_note)
+                notes = minor_triad(root_note,mode)
             elif chord_type == 'M7':
-                notes = major_seventh(root_note)
+                notes = major_seventh(root_note,mode)
             elif chord_type == 'm7':
-                notes = minor_seventh(root_note)
+                notes = minor_seventh(root_note,mode)
             elif chord_type == '7':
-                notes = dominant_seventh(root_note)
+                notes = dominant_seventh(root_note,mode)
             else:
                 raise ValueError(f"Unknown chord type: {chord_type}")
 
@@ -43,7 +43,7 @@ def block_chords_to_midi(chord_symbols, note_length, epoch):
 
     # Once all the chords have been added to the stream, write the stream to a MIDI file
     
-    filename = f"./result/{chord_name}chords_{epoch}.mid"  # Construct the filename using f-string
+    filename = f"./result/{chord_name}chords_{epoch}_mode{mode}.mid"  # Construct the filename using f-string
     mf = midi.translate.streamToMidiFile(music_stream)
     mf.open(filename, 'wb')
     mf.write()

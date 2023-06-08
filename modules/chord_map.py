@@ -10,7 +10,7 @@ def note_shift(note, semitones):
     midi_num = p.midi + semitones
     return Pitch(midi_num).nameWithOctave
 
-def major_triad(root):
+def major_triad(root,mode):
     # Define the notes of the chord
     root_note = root
     third = note_shift(root_note, 4)
@@ -34,7 +34,7 @@ def major_triad(root):
 
 
 
-def minor_triad(root):
+def minor_triad(root,mode):
     # Define the notes of the chord
     root_note = root
     third = note_shift(root_note, 3)
@@ -57,7 +57,7 @@ def minor_triad(root):
     return voicing
 
 
-def major_seventh(root):
+def major_seventh(root,mode):
      # Define the notes of the chord
     root_note = root
     third = note_shift(root_note, 4)
@@ -84,7 +84,7 @@ def major_seventh(root):
 
 
 
-def minor_seventh(root):
+def minor_seventh(root,mode):
      # Define the notes of the chord
     root_note = root
     third = note_shift(root_note, 3)
@@ -110,7 +110,7 @@ def minor_seventh(root):
     return voicing
 
 
-def dominant_seventh(root):
+def dominant_seventh(root,mode):
      # Define the notes of the chord
     root_note = root
     third = note_shift(root_note, 4)
