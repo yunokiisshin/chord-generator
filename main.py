@@ -1,6 +1,8 @@
+# main.py: コード実行内容の記述
+
 import sys
-from chord_map import *
-from chord_to_midi import *
+from modules.chord_map import *
+from modules.chord_to_midi import *
 
 '''
 sample command line: main.py 'FM Dm CM CM' 4
@@ -28,7 +30,7 @@ def main(chord_symbols, iter):
     note_length = 4.0  # コードは全音
 
     for epoch in range(1, iter+1):  
-        block_chord_progression_to_midi(chord_symbols, note_length, epoch)
+        block_chords_to_midi(chord_symbols, note_length, epoch)
 
 if __name__ == "__main__":
     # command lineの取得

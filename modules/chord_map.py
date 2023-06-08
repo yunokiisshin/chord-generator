@@ -1,3 +1,6 @@
+# chord_map.py: 音楽理論的に音を並べたテンプレートを関数として用意
+#               ボイシングや新しいコードなどはここに追加していく                
+
 from music21 import *
 from music21.pitch import Pitch
 import random
