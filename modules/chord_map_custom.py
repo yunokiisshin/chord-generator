@@ -9,6 +9,14 @@ def note_shift(note, semitones):
     midi_num = p.midi + semitones
     return Pitch(midi_num).nameWithOctave
 
+def randomize_octave(note):
+    p = Pitch(note)
+    random_list = [-1,0,1,2]
+    midi_num = p.midi + 12 * random.choice(random_list)
+    return Pitch(midi_num).nameWithOctave
+
+
+
 def major_triad(root,mode):
     # Define the notes of the chord
     root_note = root
@@ -30,9 +38,16 @@ def major_triad(root,mode):
     # Randomly select a voicing
     if mode==0:
         voicing = random.choice(voicings)
-    elif mode==1:
+        return voicing
+    
+    elif mode==3:
+        root_note = randomize_octave(root_note)
+        third = randomize_octave(third)
+        fifth = randomize_octave(fifth)
         
-    return voicing
+        voicing = [root_note, third, fifth]
+        return voicing
+    
 
 
 
@@ -55,8 +70,18 @@ def minor_triad(root,mode):
     ]
     
     # Randomly select a voicing
-    voicing = random.choice(voicings)
-    return voicing
+    if mode==0:
+        voicing = random.choice(voicings)
+        return voicing
+    
+    elif mode==3:
+        root_note = randomize_octave(root_note)
+        third = randomize_octave(third)
+        fifth = randomize_octave(fifth)
+        
+        voicing = [root_note, third, fifth]
+        return voicing
+    
 
 
 def major_seventh(root,mode):
@@ -81,8 +106,19 @@ def major_seventh(root,mode):
     ]
     
     # Randomly select a voicing
-    voicing = random.choice(voicings)
-    return voicing
+    if mode==0:
+        voicing = random.choice(voicings)
+        return voicing
+    
+    elif mode==3:
+        root_note = randomize_octave(root_note)
+        third = randomize_octave(third)
+        fifth = randomize_octave(fifth)
+        seventh = randomize_octave(note_shift(seventh, -12))
+        
+        voicing = [root_note, third, fifth, seventh]
+        return voicing
+    
 
 
 
@@ -108,8 +144,18 @@ def minor_seventh(root,mode):
     ]
     
     # Randomly select a voicing
-    voicing = random.choice(voicings)
-    return voicing
+    if mode==0:
+        voicing = random.choice(voicings)
+        return voicing
+    
+    elif mode==3:
+        root_note = randomize_octave(root_note)
+        third = randomize_octave(third)
+        fifth = randomize_octave(fifth)
+        seventh = randomize_octave(note_shift(seventh, -12))
+        
+        voicing = [root_note, third, fifth, seventh]
+        return voicing
 
 
 def dominant_seventh(root,mode):
@@ -134,5 +180,15 @@ def dominant_seventh(root,mode):
     ]
     
     # Randomly select a voicing
-    voicing = random.choice(voicings)
-    return voicing
+    if mode==0:
+        voicing = random.choice(voicings)
+        return voicing
+    
+    elif mode==3:
+        root_note = randomize_octave(root_note)
+        third = randomize_octave(third)
+        fifth = randomize_octave(fifth)
+        seventh = randomize_octave(note_shift(seventh, -12))
+        
+        voicing = [root_note, third, fifth, seventh]
+        return voicing
