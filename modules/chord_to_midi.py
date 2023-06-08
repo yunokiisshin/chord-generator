@@ -43,7 +43,7 @@ def block_chords_to_midi(chord_symbols, note_length, epoch, mode):
 
     # Once all the chords have been added to the stream, write the stream to a MIDI file
     
-    filename = f"./result/{chord_name}chords_{epoch}_mode{mode}.mid"  # Construct the filename using f-string
+    filename = f"./result/{chord_name}chords_{epoch}_{mode}notevc.mid"  # Construct the filename using f-string
     mf = midi.translate.streamToMidiFile(music_stream)
     mf.open(filename, 'wb')
     mf.write()
