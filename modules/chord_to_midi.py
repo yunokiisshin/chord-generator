@@ -1,7 +1,7 @@
 #chord_to_midi.py: １小節１コード、リズムなしのシンプルなMIDI書き出し担当
 
 from music21 import *
-from modules.chord_map import *
+from modules.chord_map_custom import *
 
 def block_chords_to_midi(chord_symbols, note_length, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
@@ -24,7 +24,7 @@ def block_chords_to_midi(chord_symbols, note_length, epoch, mode):
             root_note += "3"
             
             if chord_type == 'M':
-                notes = major_triad(root_note,mode) # 0=no specification, 1=with specification
+                notes = major_triad(root_note,mode) 
             elif chord_type == 'm':
                 notes = minor_triad(root_note,mode)
             elif chord_type == 'M7':
@@ -43,7 +43,7 @@ def block_chords_to_midi(chord_symbols, note_length, epoch, mode):
 
     # Once all the chords have been added to the stream, write the stream to a MIDI file
     
-    filename = f"./result/{chord_name}chords_{epoch}_{mode}notevc.mid"  # Construct the filename using f-string
+    filename = f"./result/{chord_name}chords_{epoch}_{mode}notes.mid"  # Construct the filename using f-string
     mf = midi.translate.streamToMidiFile(music_stream)
     mf.open(filename, 'wb')
     mf.write()

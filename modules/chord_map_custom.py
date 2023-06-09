@@ -28,7 +28,7 @@ def major_triad(root,mode):
     note_pool = [shift(root_note,-12), shift(fifth,-12),
                  root_note, third, fifth, 
                  shift(root_note,12), shift(third,12), shift(fifth,12),
-                 shift(root_note,24), shift(third, 24)]
+                 shift(root_note,24)]
     # Define possible voicings
     voicings = [
         [root, third, fifth],            # root position
@@ -71,7 +71,7 @@ def minor_triad(root,mode):
     note_pool = [shift(root_note,-12), shift(fifth,-12),
                  root_note, third, fifth, 
                  shift(root_note,12), shift(third,12), shift(fifth,12),
-                 shift(root_note,24), shift(third, 24)]
+                 shift(root_note,24)]
     # Define possible voicings
     voicings = [
         [root, third, fifth],       # root position
@@ -100,6 +100,7 @@ def minor_triad(root,mode):
 
     elif mode == 5:
         voicing = random.sample(note_pool, 5)
+        print(voicing)
         return voicing
     
 
@@ -111,10 +112,10 @@ def major_seventh(root,mode):
     fifth = shift(root_note, 7)
     seventh = shift(root_note,11)
 
-    note_pool = [shift(root_note,-12), shift(fifth,-12),shift(seventh, -12),
+    note_pool = [shift(seventh, -24),shift(root_note,-12), shift(fifth,-12),shift(seventh, -12),
                  root_note, third, fifth, seventh,
                  shift(root_note,12), shift(third,12), shift(fifth,12),shift(seventh, 12),
-                 shift(root_note,24), shift(third, 24)]
+                 shift(root_note,24)]
     # Define possible voicings
     voicings = [
         [root, third, fifth, seventh],     # root position
@@ -157,10 +158,10 @@ def minor_seventh(root,mode):
     fifth = shift(root_note, 7)
     seventh = shift(root_note,10)
 
-    note_pool = [shift(root_note,-12), shift(fifth,-12),shift(seventh, -12),
+    note_pool = [shift(seventh,-24),shift(root_note,-12), shift(fifth,-12),shift(seventh, -12),
                  root_note, third, fifth, seventh,
                  shift(root_note,12), shift(third,12), shift(fifth,12),shift(seventh, 12),
-                 shift(root_note,24), shift(third, 24)]
+                 shift(root_note,24)]
     # Define possible voicings
     voicings = [
         [root, third, fifth, seventh],     # root position
@@ -205,7 +206,7 @@ def dominant_seventh(root,mode):
     note_pool = [shift(root_note,-12), shift(fifth,-12),shift(seventh, -12),
                  root_note, third, fifth, seventh,
                  shift(root_note,12), shift(third,12), shift(fifth,12),shift(seventh, 12),
-                 shift(root_note,24), shift(third, 24)]
+                 shift(root_note,24)]
     # Define possible voicings
     voicings = [
         [root, third, fifth, seventh],     # root position
