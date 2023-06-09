@@ -1,5 +1,8 @@
 #chord_to_midi.py: １小節１コード、リズムなしのシンプルなMIDI書き出し担当
 
+# maybe think about post-generation? Like adding a filter that shifts chords around
+# when the chord voicing is too high up, by calculating the sum of note values?
+
 from music21 import *
 from modules.chord_map_custom import *
 
