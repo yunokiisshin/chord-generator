@@ -23,7 +23,7 @@ def major_triad(root,mode):
     # Define the notes of the chord
     root_note = root
     if Pitch(root_note).midi > 64: # higher than E4
-        root_note = shift(root_note,12) # F3-E4 is the root note range
+        root_note = shift(root_note,-12) # F3-E4 is the root note range
     third = shift(root_note, 4)
     fifth = shift(root_note, 7)
 
@@ -75,6 +75,8 @@ def major_triad(root,mode):
 def minor_triad(root,mode):
     # Define the notes of the chord
     root_note = root
+    if Pitch(root_note).midi > 64: # higher than E4
+        root_note = shift(root_note,-12) # F3-E4 is the root note range
     third = shift(root_note, 3)
     fifth = shift(root_note, 7)
 
@@ -125,6 +127,8 @@ def minor_triad(root,mode):
 def major_seventh(root,mode):
      # Define the notes of the chord
     root_note = root
+    if Pitch(root_note).midi > 64: # higher than E4
+        root_note = shift(root_note,12) # F3-E4 is the root note range
     third = shift(root_note, 4)
     fifth = shift(root_note, 7)
     seventh = shift(root_note,11)
@@ -179,6 +183,8 @@ def major_seventh(root,mode):
 def minor_seventh(root,mode):
      # Define the notes of the chord
     root_note = root
+    if Pitch(root_note).midi > 64: # higher than E4
+        root_note = shift(root_note,12) # F3-E4 is the root note range
     third = shift(root_note, 3)
     fifth = shift(root_note, 7)
     seventh = shift(root_note,10)
@@ -231,6 +237,8 @@ def minor_seventh(root,mode):
 def dominant_seventh(root,mode):
      # Define the notes of the chord
     root_note = root
+    if Pitch(root_note).midi > 64: # higher than E4
+        root_note = shift(root_note,12) # F3-E4 is the root note range
     third = shift(root_note, 4)
     fifth = shift(root_note, 7)
     seventh = shift(root_note,10)
