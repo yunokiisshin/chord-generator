@@ -31,17 +31,17 @@ def major_triad(root,mode):
                  shift(root_note,24)]
     # Define possible voicings
     voicings = [
-        [root, third, fifth],            # root position
+        [root, third, fifth],       # root position
+        [root, third, fifth, shift(root_note,12)], 
         [third, fifth, shift(root_note,12)],       # first inversion
+        [third, fifth, shift(root_note,12), shift(third,12)],       # first inversion
         [shift(fifth, -12), root, third],  # second inversion
         [fifth, shift(root_note,12), shift(third,12)],
-        [root, third, fifth, shift(root_note,12)], 
-        [third, fifth, shift(root_note,12), shift(third,12)],       # first inversion
         [shift(fifth, -12), root, third, fifth],  # second inversion
         [root, fifth, shift(third,12), shift(fifth,12)]
         # Add more voicings as desired...
     ]
-
+    
     # Randomly select a voicing
     if mode==0:
         voicing = random.choice(voicings)
@@ -53,11 +53,13 @@ def major_triad(root,mode):
         fifth = randomize_octave(fifth)
         
         voicing = [root_note, third, fifth]
-        
-    elif mode == 5:
-        voicing = random.sample(note_pool, 5)
         return voicing
 
+    elif mode == 5:
+        voicing = random.sample(note_pool, 5)
+        print(voicing)
+        return voicing
+    
     
 
 
