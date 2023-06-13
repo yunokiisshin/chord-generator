@@ -22,7 +22,7 @@ def randomize_octave(note):
 def major_triad(root,mode):
     # Define the notes of the chord
     root_note = root
-    if root_note > 64: # higher than E4
+    if Pitch(root_note).midi > 64: # higher than E4
         root_note = shift(root_note,12) # F3-E4 is the root note range
     third = shift(root_note, 4)
     fifth = shift(root_note, 7)
