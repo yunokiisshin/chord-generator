@@ -22,13 +22,15 @@ def randomize_octave(note):
 def major_triad(root,mode):
     # Define the notes of the chord
     root_note = root
+    if root_note > 64: # higher than E4
+        root_note = shift(root_note,12) # F3-E4 is the root note range
     third = shift(root_note, 4)
     fifth = shift(root_note, 7)
 
     note_pool = [shift(root_note,-12), shift(fifth,-12),
                  root_note, third, fifth, 
-                 shift(root_note,12), shift(third,12), shift(fifth,12),
-                 shift(root_note,24)]
+                 shift(root_note,12), shift(third,12), shift(fifth,12)]
+    
     # Define possible voicings
     voicings = [
         [root, third, fifth],       # root position
@@ -48,11 +50,11 @@ def major_triad(root,mode):
         return voicing
     
     elif mode==3:
-        root_note = randomize_octave(root_note)
-        third = randomize_octave(third)
-        fifth = randomize_octave(fifth)
         
-        voicing = [root_note, third, fifth]
+        voicing = [random.choice([shift(root_note,-12), root,shift(root_note,12)]),
+                   random.choice([shift(third,-12), third]), 
+                   random.choice([shift(fifth, -12),fifth])
+        ]
         return voicing
 
     elif mode == 5:
@@ -72,8 +74,8 @@ def minor_triad(root,mode):
 
     note_pool = [shift(root_note,-12), shift(fifth,-12),
                  root_note, third, fifth, 
-                 shift(root_note,12), shift(third,12), shift(fifth,12),
-                 shift(root_note,24)]
+                 shift(root_note,12), shift(third,12), shift(fifth,12)]
+    
     # Define possible voicings
     voicings = [
         [root, third, fifth],       # root position
@@ -93,11 +95,11 @@ def minor_triad(root,mode):
         return voicing
     
     elif mode==3:
-        root_note = randomize_octave(root_note)
-        third = randomize_octave(third)
-        fifth = randomize_octave(fifth)
         
-        voicing = [root_note, third, fifth]
+        voicing = [random.choice([shift(root_note,-12), root,shift(root_note,12)]),
+                   random.choice([shift(third,-12), third]), 
+                   random.choice([shift(fifth, -12),fifth])
+        ]
         return voicing
 
     elif mode == 5:
@@ -105,7 +107,7 @@ def minor_triad(root,mode):
         print(voicing)
         return voicing
     
-
+    
 
 def major_seventh(root,mode):
      # Define the notes of the chord
