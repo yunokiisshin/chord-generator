@@ -27,20 +27,31 @@ def major_triad(root,mode):
     third = shift(root_note, 4)
     fifth = shift(root_note, 7)
 
-    note_pool = [shift(root_note,-12), shift(fifth,-12),
+    note_pool = [shift(third,-12), shift(fifth,-12),
                  root_note, third, fifth, 
-                 shift(root_note,12), shift(third,12), shift(fifth,12)]
+                 shift(root_note,12), shift(third,12)]
     
     # Define possible voicings
     voicings = [
         [root, third, fifth],       # root position
-        [root, third, fifth, shift(root_note,12)], 
         [third, fifth, shift(root_note,12)],       # first inversion
-        [third, fifth, shift(root_note,12), shift(third,12)],       # first inversion
         [shift(fifth, -12), root, third],  # second inversion
+        
+        [root, third, fifth, shift(root_note,12)], 
+        [third, fifth, shift(root_note,12), shift(third,12)],       # first inversion
         [fifth, shift(root_note,12), shift(third,12)],
         [shift(fifth, -12), root, third, fifth],  # second inversion
-        [root, fifth, shift(third,12), shift(fifth,12)]
+        [root, fifth, shift(third,12), shift(fifth,12)],
+        
+        [shift(root_note,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
+        [shift(root_note,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
+        [shift(third,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
+        [shift(third,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
+        [shift(fifth,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
+        [shift(fifth,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
+        [shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note, third],
+        [shift(root_note,-12), shift(fifth,-12), root_note, third, fifth],
+        
         # Add more voicings as desired...
     ]
     
@@ -51,17 +62,12 @@ def major_triad(root,mode):
     
     elif mode==3:
         
-        voicing = [random.choice([shift(root_note,-12), root,shift(root_note,12)]),
-                   random.choice([shift(third,-12), third]), 
-                   random.choice([shift(fifth, -12),fifth])
-        ]
+        voicing = random.choice(voicings[0:3])
         return voicing
 
     elif mode == 5:
-        voicing = random.sample(note_pool, 5)
-        print(voicing)
+        voicing = random.choice(voicings[8:])
         return voicing
-    
     
 
 
@@ -79,14 +85,24 @@ def minor_triad(root,mode):
     # Define possible voicings
     voicings = [
         [root, third, fifth],       # root position
-        [root, third, fifth, shift(root_note,12)], 
         [third, fifth, shift(root_note,12)],       # first inversion
-        [third, fifth, shift(root_note,12), shift(third,12)],       # first inversion
         [shift(fifth, -12), root, third],  # second inversion
+        
+        [root, third, fifth, shift(root_note,12)], 
+        [third, fifth, shift(root_note,12), shift(third,12)],       # first inversion
         [fifth, shift(root_note,12), shift(third,12)],
         [shift(fifth, -12), root, third, fifth],  # second inversion
-        [root, fifth, shift(third,12), shift(fifth,12)]
-        # Add more voicings as desired...
+        [root, fifth, shift(third,12), shift(fifth,12)],
+        
+        [shift(root_note,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
+        [shift(root_note,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
+        [shift(third,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
+        [shift(third,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
+        [shift(fifth,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
+        [shift(fifth,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
+        [shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note, third],
+        [shift(root_note,-12), shift(fifth,-12), root_note, third, fifth],
+        
     ]
     
     # Randomly select a voicing
@@ -96,16 +112,13 @@ def minor_triad(root,mode):
     
     elif mode==3:
         
-        voicing = [random.choice([shift(root_note,-12), root,shift(root_note,12)]),
-                   random.choice([shift(third,-12), third]), 
-                   random.choice([shift(fifth, -12),fifth])
-        ]
+        voicing = random.choice(voicings[0:3])
         return voicing
 
     elif mode == 5:
-        voicing = random.sample(note_pool, 5)
-        print(voicing)
+        voicing = random.choice(voicings[8:])
         return voicing
+
     
     
 
