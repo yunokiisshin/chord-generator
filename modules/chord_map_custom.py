@@ -92,7 +92,6 @@ def minor_triad(root,mode):
         
         [root, third, fifth, shift(root_note,12)], 
         [third, fifth, shift(root_note,12), shift(third,12)],       # first inversion
-        [fifth, shift(root_note,12), shift(third,12)],
         [shift(fifth, -12), root, third, fifth],  # second inversion
         [root, fifth, shift(third,12), shift(fifth,12)],
         
@@ -100,6 +99,7 @@ def minor_triad(root,mode):
         [shift(root_note,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
         [shift(third,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
         [shift(third,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
+        [fifth, shift(root_note,12), shift(third,12)],
         [shift(fifth,-24), shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note],
         [shift(fifth,-24), shift(root_note,-12), shift(fifth,-12), root_note, third],
         [shift(root_note,-12), shift(third,-12), shift(fifth,-12), root_note, third],
