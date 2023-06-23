@@ -3,6 +3,7 @@
 
 from music21 import *
 from modules.chord_map_custom import *
+from modules.chord_map_final import *
 
 def block_chords_to_midi(chord_symbols, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
@@ -37,23 +38,8 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
             else:
                 chord_type = chord_symbol[1:]
             
-            # Generate the notes for the chord
-            
-            #balancing the sound range of chords
-            root_note += "4"
-            
-            if chord_type == '':
-                notes = major_triad(root_note,mode) 
-            elif chord_type == 'm':
-                notes = minor_triad(root_note,mode)
-            elif chord_type == 'M7':
-                notes = major_seventh(root_note,mode)
-            elif chord_type == 'm7':
-                notes = minor_seventh(root_note,mode)
-            elif chord_type == '7':
-                notes = dominant_seventh(root_note,mode)
-            else:
-                raise ValueError(f"Unknown chord type: {chord_type}")
+            # Generate the notes for this chord
+            notes = generate(root_note, chord_type, mode)
 
             # Create a music21 chord object with these notes
             
