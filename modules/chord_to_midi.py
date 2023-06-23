@@ -4,8 +4,10 @@
 from music21 import *
 from modules.chord_map_custom import *
 
-def block_chords_to_midi(chord_symbols, note_length, epoch, mode):
+def block_chords_to_midi(chord_symbols, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
+    
+    note_length = 4 # temporary
     music_stream = stream.Stream()
     for i in range(4):
         chord_name = ""
