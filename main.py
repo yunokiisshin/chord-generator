@@ -23,7 +23,7 @@ Output: MIDI files of iter versions will be saved in ./output file.
 
 def main(chord_symbols, iter, mode):
     
-    # chord_symbolsがリストかの確認
+    # check if chord_symbols is a list
     if isinstance(chord_symbols, str):
         chord_symbols = chord_symbols.split()
         print(chord_symbols)
