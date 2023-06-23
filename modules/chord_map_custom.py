@@ -182,7 +182,7 @@ def major_seventh(root,mode):
 
 def minor_seventh(root,mode):
      # Define the notes of the chord
-    root_note = root
+    root_note = root 
     if Pitch(root_note).midi > 64: # higher than E4
         root_note = shift(root_note,12) # F3-E4 is the root note range
     third = shift(root_note, 3)

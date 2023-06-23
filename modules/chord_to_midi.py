@@ -18,8 +18,8 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
     
     chord_name = ''
     for bar in progression.values():
-        print(bar)
         bar_mod = bar.replace("/", "")
+        print(bar)
         chord_name = chord_name + bar_mod + '_'
         if "/" in bar:
             chords_in_bar = bar.split('/') # "C/C/C/G" -> ['C', 'C', 'C', 'G']
@@ -57,7 +57,8 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
 
             # Create a music21 chord object with these notes
             
-            note_length = 4 / len(bar) # apply the shifting speed of in-bar chords
+            note_length = 4.0 / len(chords_in_bar) # apply the shifting speed of in-bar chords
+            print(note_length)
             c = chord.Chord(notes, duration=duration.Duration(note_length))
             # Add the chord to the stream
             music_stream.append(c)
@@ -69,9 +70,3 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
     mf.open(filename, 'wb')
     mf.write()
     mf.close()
-
-
-
-
-
-
