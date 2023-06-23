@@ -15,22 +15,27 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
                         ("bar4", chord_symbols[3])])
     print(progression)
     
+    
+    chord_name = ''
     for bar in progression.values():
         print(bar)
+        bar_mod = bar.replace("/", "")
+        chord_name = chord_name + bar_mod + '_'
         if "/" in bar:
-            bar.split('/') # "C/C/C/G" -> ['C', 'C', 'C', 'G']
+            chords_in_bar = bar.split('/') # "C/C/C/G" -> ['C', 'C', 'C', 'G']
         else: 
-            list(bar)    
-    
-        for chord in bar:
+            chords_in_bar = [bar] # if there's only one chord in the bar, still make it a list
+
+        for chord_symbol in chords_in_bar:
+            # process chord_symbol as before
 
             # Determine the root note and the type of chord
-            root_note = chord[0]
-            if chord[1] in ["#", "b"]:
-                root_note += chord[1]
-                chord_type = chord[2:]
+            root_note = chord_symbol[0]
+            if len(chord_symbol)>1 and chord_symbol[1] in ["#", "b"]:
+                root_note += chord_symbol[1]
+                chord_type = chord_symbol[2:]
             else:
-                chord_type = chord[1:]
+                chord_type = chord_symbol[1:]
             
             # Generate the notes for the chord
             
@@ -59,7 +64,7 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
 
     # Once all the chords have been added to the stream, write the stream to a MIDI file
     
-    filename = f"./result/{chord_name}chords_{mode}notes_{epoch}.mid"  # Construct the filename using f-string
+    filename = f"./result/{chord_name}{mode}notes_{epoch}.mid"  # Construct the filename using f-string
     mf = midi.translate.streamToMidiFile(music_stream)
     mf.open(filename, 'wb')
     mf.write()
