@@ -26,6 +26,7 @@ def main(chord_symbols, iter, mode):
     # chord_symbolsがリストかの確認
     if isinstance(chord_symbols, str):
         chord_symbols = chord_symbols.split()
+        print(chord_symbols)
 
     for epoch in range(1, iter+1):  
         block_chords_to_midi(chord_symbols, epoch, mode)

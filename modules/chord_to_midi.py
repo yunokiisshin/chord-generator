@@ -6,9 +6,22 @@ from modules.chord_map_custom import *
 
 def block_chords_to_midi(chord_symbols, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
+    music_stream = stream.Stream()    
     
     note_length = 4 # temporary
-    music_stream = stream.Stream()
+
+    # create a dictionary
+    progression = dict([("bar1", chord_symbols[0]), 
+                        ("bar2", chord_symbols[1]), 
+                        ("bar3", chord_symbols[2]), 
+                        ("bar4", chord_symbols[3])])
+    print(progression)
+    
+    for bar in progression.values():
+        print(bar)
+        if "/" in bar:
+    
+    
     for i in range(4):
         chord_name = ""
         for symbol in chord_symbols:
