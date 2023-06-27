@@ -8,7 +8,7 @@ from modules.chord_map_final import *
 def block_chords_to_midi(chord_symbols, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
     music_stream = stream.Stream()    
-
+    previous_notes = []
     # create a dictionary
     progression = dict([("bar1", chord_symbols[0]), 
                         ("bar2", chord_symbols[1]), 
@@ -39,7 +39,9 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
                 chord_type = chord_symbol[1:]
             
             # Generate the notes for this chord
-            notes = generate(root_note, chord_type, mode)
+            notes = generate(root_note, chord_type, mode, previous_notes)
+            previous_notes = []
+            previous_notes.append(notes)
 
             # Create a music21 chord object with these notes
             

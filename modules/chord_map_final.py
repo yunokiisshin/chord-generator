@@ -25,8 +25,7 @@ def fill_dict_value(note_dict, key, note):
     while note_val.midi <= highest_note:
         note_dict[key].append(note_val.midi)
         note_val.midi += 12
-
-    
+        
 
 def prepare_note_dict(root_note, chord_type):
     root = root_note
@@ -46,24 +45,58 @@ def prepare_note_dict(root_note, chord_type):
 
     
 
-'''
-def generate(root_note, chord_type, mode):
+
+
+def generate(root_note, chord_type, mode, previous_notes): # previous notes is list of pitch objects
     
-    if chord_type == '':
-        notes = major_triad(root_note,mode)
-    elif chord_type == 'm':
-        notes = minor_triad(root_note,mode)
-    elif chord_type == 'M7':
-        notes = major_seventh(root_note,mode)
-    elif chord_type == 'm7':
-        notes = minor_seventh(root_note,mode)
-    elif chord_type == '7':
-        notes = dominant_seventh(root_note,mode)
+    # convert previous_notes to int list
+    previous_val = sorted(map(lambda x: x.midi, previous_notes))
+    print(previous_val)
+
+    # refresh the chord dictionary
+    note_dict = dict([("root", []), ("third", []), ("fifth", [])])
+    prepare_note_dict(root_note, chord_type)    
+    
+    # notes have to be a list of Pitch object
+    notes = []
+    
+    # finding the middle note from previous chord as reference
+    
+    ref = previous_val[len(previous_val)/2]
+    print(ref)
+    
+    # if this is the first time generating a chord
+    if ref == '':
+        root = random.choice(note_dict["root"])
+        notes.append(root)
+        third = random.choice(note_dict["third"])
+        notes.append(third)
+        fifth = random.choice(note_dict["fifth"])
+        notes.append(fifth)
+    
     else:
-        raise ValueError(f"Unknown chord type: {chord_type}")    
+        note_list = sorted(note_dict.items())
+        closest = note_list[0]
+        distance = 100
+        for i, note in enumerate(note_list):
+            if abs(closest-note)<distance:
+                closest = note_list[i]
+                distance = abs(closest-note)
+        
+        first_note = closest
+        notes.append(first_note)
+        
+        if first_note in note_dict["root"]:
+            
+        
+            
+        
     
-    return notes    
-'''
+    # find the closest note in the dictionary 
+    
+    
+    return notes   
+
 
 
 '''
