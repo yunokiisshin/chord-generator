@@ -1,4 +1,5 @@
 # chord_map_final.py: natural and varying voicing generator
+# only implementing triads
 
 from music21 import *
 from music21.pitch import Pitch
@@ -31,14 +32,22 @@ def fill_dict_value(note_dict, key, note):
 def prepare_note_dict(root_note, chord_type):
     
     root = root_note.midi
-    third = shift(root_note, )
     
-    for dict_key in ["root", "third", "fifth"]:
-        fill_dict_value(note_dict, dict_key, root)
+    if chord_type == '':
+        third = shift(root_note, 4)    
+    elif chord_type == 'm':
+        third = shift(root_note, 3)
+    
+    fifth = shift(root_note, 7)    
         
+    fill_dict_value(note_dict, "root", root)
+    fill_dict_value(note_dict, "third", third)
+    fill_dict_value(note_dict, "fifth", fifth)
+        
+    print(note_val)
     
 
-
+'''
 def generate(root_note, chord_type, mode):
     
     if chord_type == '':
@@ -59,3 +68,11 @@ def generate(root_note, chord_type, mode):
 
 
     return notes
+    
+    
+'''
+
+def main():
+    note = pitch.Pitch("C4")
+    prepare_note_dict(note, '')
+    print(note_dict)
