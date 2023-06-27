@@ -32,7 +32,7 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
 
             # Determine the root note and the type of chord
             root_note = chord_symbol[0]
-            if len(chord_symbol)>1 and chord_symbol[1] in ["#", "b"]:
+            if len(chord_symbol) > 1 and chord_symbol[1] in ["#", "b"]:
                 root_note += chord_symbol[1]
                 chord_type = chord_symbol[2:]
             else:
