@@ -74,7 +74,8 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
         fifth = random.choice(note_dict["fifth"])
         notes.append(fifth)
     
-    else:
+    else:   # there is a previous chord generated
+        # find the closest note from the middle note of the previous chord
         note_list = sorted(note_dict.items())
         closest = note_list[0]
         distance = 100
@@ -82,20 +83,64 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
             if abs(closest-note)<distance:
                 closest = note_list[i]
                 distance = abs(closest-note)
-        
+        # make that note the first note of the current chord
         first_note = closest
         notes.append(first_note)
         
-        if first_note in note_dict["root"]:
+        if first_note in note_dict["root"]: # choosing third and fifth
+            bucket = []
+            for item in note_dict["third"]:
+                if abs(item-first_note) <= 9:
+                    bucket.append(item)
+            second_note = random.choice(bucket)
+            notes.append(second_note)
             
-        
+            bucket.clear()
+            for item in note_dict["fifth"]:
+                if abs(item-first_note) <= 9:
+                    bucket.append(item)
+            third_note = random.choice(bucket)
+            notes.append(third_note)
             
-        
+        elif first_note in note_dict["third"]: # choosing root and fifth
+            bucket = []
+            for item in note_dict["root"]:
+                if abs(item-first_note) <= 9:
+                    bucket.append(item)
+            second_note = random.choice(bucket)
+            notes.append(second_note)
+            
+            bucket.clear()
+            for item in note_dict["fifth"]:
+                if abs(item-first_note) <= 9:
+                    bucket.append(item)
+            third_note = random.choice(bucket)
+            notes.append(third_note)
+            
+        elif first_note in note_dict["fifth"]: # choosing root and third
+            bucket = []
+            for item in note_dict["root"]:
+                if abs(item-first_note) <= 9:
+                    bucket.append(item)
+            second_note = random.choice(bucket)
+            notes.append(second_note)
+            
+            bucket.clear()
+            for item in note_dict["third"]:
+                if abs(item-first_note) <= 9:
+                    bucket.append(item)
+            third_note = random.choice(bucket)
+            notes.append(third_note)        
+            
+    note_pitches = []  
+            
+    for note in notes:
+        midi_number = note
+        p = pitch.Pitch()
+        p.midi = midi_number
+        note_pitches.append(p)
     
-    # find the closest note in the dictionary 
-    
-    
-    return notes   
+    return note_pitches
 
 
 
