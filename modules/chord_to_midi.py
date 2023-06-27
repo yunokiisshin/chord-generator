@@ -44,6 +44,7 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
             # Create a music21 chord object with these notes
             
             note_length = 4.0 / len(chords_in_bar) # apply the shifting speed of in-bar chords
+
             c = chord.Chord(notes, duration=duration.Duration(note_length))
             # Add the chord to the stream
             music_stream.append(c)
