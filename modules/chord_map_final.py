@@ -66,6 +66,7 @@ def generate(root_note, chord_type, mode):
 '''
 
 
+'''
 def main():
     print(f"lowest value: {lowest_note}")
     print(f"highest value: {highest_note}")
@@ -74,3 +75,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+'''
