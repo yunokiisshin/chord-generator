@@ -5,8 +5,8 @@ from music21 import *
 from music21.pitch import Pitch
 import random
 
-lowest_note = pitch.Pitch("F#2").midi
-highest_note = pitch.Pitch("D4").midi
+lowest_note = pitch.Pitch("F#3").midi
+highest_note = pitch.Pitch("D5").midi
 
 note_dict = dict([("root", []), ("third", []), ("fifth", [])])
  
@@ -28,14 +28,14 @@ def fill_dict_value(note_dict, key, note):
         
 
 def prepare_note_dict(root_note, chord_type):
-    root = root_note
+    root = Pitch(root_note)
 
     if chord_type == '':
-        third = shift(root, 4)    
+        third = shift(root, 4)
     elif chord_type == 'm':
         third = shift(root, 3)
-    
-    fifth = shift(root, 7)    
+
+    fifth = shift(root, 7)
 
     fill_dict_value(note_dict, "root", root)
     fill_dict_value(note_dict, "third", third)
@@ -43,30 +43,32 @@ def prepare_note_dict(root_note, chord_type):
 
     print(note_dict)
 
+
     
 
 
 
 def generate(root_note, chord_type, mode, previous_notes): # previous notes is list of pitch objects
     
+    print("  in generate()")
     # convert previous_notes to int list
-    previous_val = sorted(map(lambda x: x.midi, previous_notes))
-    print(previous_val)
+    previous_val = []
+    for note in previous_notes:
+        previous_val.append(note.midi)
+    previous_val = sorted(previous_val)
 
     # refresh the chord dictionary
-    note_dict = dict([("root", []), ("third", []), ("fifth", [])])
+    for key in note_dict.keys():
+        note_dict[key].clear()
+        
     prepare_note_dict(root_note, chord_type)    
-    
     # notes have to be a list of Pitch object
     notes = []
     
-    # finding the middle note from previous chord as reference
-    
-    ref = previous_val[len(previous_val)/2]
-    print(ref)
-    
     # if this is the first time generating a chord
-    if ref == '':
+    if previous_val == []:
+        ref = lowest_note + highest_note // 2
+        print("    in if")
         root = random.choice(note_dict["root"])
         notes.append(root)
         third = random.choice(note_dict["third"])
@@ -76,11 +78,20 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
     
     else:   # there is a previous chord generated
         # find the closest note from the middle note of the previous chord
-        note_list = sorted(note_dict.items())
+        print("    in else")
+        
+        # finding the middle note from previous chord as reference
+        ref = previous_val[len(previous_val)//2]
+        note_list = []
+        print(note_dict)
+        for value in note_dict.values():
+            for item in value:
+                note_list.append(item)
+        print(note_list)
         closest = note_list[0]
         distance = 100
         for i, note in enumerate(note_list):
-            if abs(closest-note)<distance:
+            if abs(ref - note) < distance:
                 closest = note_list[i]
                 distance = abs(closest-note)
         # make that note the first note of the current chord
