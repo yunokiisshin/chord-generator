@@ -14,12 +14,10 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
                         ("bar2", chord_symbols[1]), 
                         ("bar3", chord_symbols[2]), 
                         ("bar4", chord_symbols[3])])
-    print(progression)
     
     
     chord_name = ''
     for bar in progression.values():
-        print(bar)
         bar_mod = bar.replace("/", "")
         chord_name = chord_name + bar_mod + '_'
         if "/" in bar:
@@ -39,7 +37,6 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
                 chord_type = chord_symbol[1:]
             
             # Generate the notes for this chord
-            print("going into generate()")
             notes = generate(root_note, chord_type, mode, previous_notes)
             previous_notes.clear()
             previous_notes.extend(notes)
