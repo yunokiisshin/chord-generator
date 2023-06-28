@@ -10,6 +10,7 @@ lowest_note = pitch.Pitch("F#3").midi
 highest_note = pitch.Pitch("D5").midi
 
 # dictionary container for each note for the processed chord
+# contains ints that represent MIDI note value
 note_dict = dict([("root", []), ("third", []), ("fifth", [])])
  
 '''changes the sound by entering any given semitone number'''
@@ -80,7 +81,6 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
                 if abs(item-first_note) <= 9:
                     bucket.append(item)
             second_note = random.choice(bucket)
-            print(second_note)
             notes.append(second_note)
             
             bucket.clear()
@@ -88,7 +88,6 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
                 if abs(item-first_note) <= 9:
                     bucket.append(item)
             third_note = random.choice(bucket)
-            print(third_note)
             notes.append(third_note)
             
         elif first_note in note_dict["third"]: # choosing root and fifth
@@ -140,7 +139,6 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
         # make that note the first note of the current chord
         first_note = closest
         notes.append(first_note)
-        print(first_note)
         
         if first_note in note_dict["root"]: # choosing third and fifth
             bucket = []
@@ -148,7 +146,6 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
                 if abs(item-first_note) <= 9:
                     bucket.append(item)
             second_note = random.choice(bucket)
-            print(second_note)
             notes.append(second_note)
             
             bucket.clear()
@@ -156,7 +153,6 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
                 if abs(item-first_note) <= 9:
                     bucket.append(item)
             third_note = random.choice(bucket)
-            print(third_note)
             notes.append(third_note)
             
         elif first_note in note_dict["third"]: # choosing root and fifth
@@ -197,7 +193,6 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
         p.midi = midi_number
         note_pitches.append(p)
     
-    print(f"note pitches: {note_pitches}")
     return note_pitches
 
 

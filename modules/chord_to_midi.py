@@ -2,8 +2,9 @@
 
 
 from music21 import *
-from modules.chord_map_custom import *
+from modules.outdated.chord_map_custom import *
 from modules.chord_map_final import *
+
 
 def block_chords_to_midi(chord_symbols, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
@@ -50,7 +51,6 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
             music_stream.append(c)
 
     # Once all the chords have been added to the stream, write the stream to a MIDI file
-    
     filename = f"./result/{chord_name}{mode}notes_{epoch}.mid"  # Construct the filename using f-string
     mf = midi.translate.streamToMidiFile(music_stream)
     mf.open(filename, 'wb')

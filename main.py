@@ -1,7 +1,7 @@
 # main.py: description on code logics and algorithm
 
 import sys
-from modules.chord_map import *
+from modules.outdated.chord_map import *
 from modules.chord_to_midi import *
 
 '''
@@ -13,14 +13,10 @@ Parameters:
 
 Output: MIDI files of iter versions will be saved in ./output file. 
 
-◯logics
+logics: 
 The program looks at the middle note of the previous chord, and select the closest note 
 to it in the current chord. It then chooses notes at most nine half-steps away from that note,
-creating a relatively close but 
-
-コード進行をリストに保存
-→リストの要素ごとに、主音とコードに分け、それを元にコードのボイシングを返す。
-→4つ返されたコードを一つのMIDIにまとめ、4小節のコード進行パターンとして保存する。
+creating a relatively close but varying voicings
 '''
 
 def main(chord_symbols, iter, mode):
