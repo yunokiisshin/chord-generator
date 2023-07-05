@@ -16,39 +16,39 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
                         ("bar3", chord_symbols[2]), 
                         ("bar4", chord_symbols[3])])
     
-    
-    chord_name = ''
-    for bar in progression.values():
-        bar_mod = bar.replace("/", "")
-        chord_name = chord_name + bar_mod + '_'
-        if "/" in bar:
-            chords_in_bar = bar.split('/') # "C/C/C/G" -> ['C', 'C', 'C', 'G']
-        else: 
-            chords_in_bar = [bar] # if there's only one chord in the bar, still make it a list
+    for i in range(4):    
+        chord_name = ''
+        for bar in progression.values():
+            bar_mod = bar.replace("/", "")
+            chord_name = chord_name + bar_mod + '_'
+            if "/" in bar:
+                chords_in_bar = bar.split('/') # "C/C/C/G" -> ['C', 'C', 'C', 'G']
+            else: 
+                chords_in_bar = [bar] # if there's only one chord in the bar, still make it a list
 
-        for chord_symbol in chords_in_bar:
-            # process chord_symbol as before
+            for chord_symbol in chords_in_bar:
+                # process chord_symbol as before
 
-            # Determine the root note and the type of chord
-            root_note = chord_symbol[0]
-            if len(chord_symbol) > 1 and chord_symbol[1] in ["#", "b"]:
-                root_note += chord_symbol[1]
-                chord_type = chord_symbol[2:]
-            else:
-                chord_type = chord_symbol[1:]
-            
-            # Generate the notes for this chord
-            notes = generate(root_note, chord_type, mode, previous_notes)
-            previous_notes.clear()
-            previous_notes.extend(notes)
+                # Determine the root note and the type of chord
+                root_note = chord_symbol[0]
+                if len(chord_symbol) > 1 and chord_symbol[1] in ["#", "b"]:
+                    root_note += chord_symbol[1]
+                    chord_type = chord_symbol[2:]
+                else:
+                    chord_type = chord_symbol[1:]
+                
+                # Generate the notes for this chord
+                notes = generate(root_note, chord_type, mode, previous_notes)
+                previous_notes.clear()
+                previous_notes.extend(notes)
 
-            # Create a music21 chord object with these notes
-            
-            note_length = 4.0 / len(chords_in_bar) # apply the shifting speed of in-bar chords
+                # Create a music21 chord object with these notes
+                
+                note_length = 4.0 / len(chords_in_bar) # apply the shifting speed of in-bar chords
 
-            c = chord.Chord(notes, duration=duration.Duration(note_length))
-            # Add the chord to the stream
-            music_stream.append(c)
+                c = chord.Chord(notes, duration=duration.Duration(note_length))
+                # Add the chord to the stream
+                music_stream.append(c)
 
     # Once all the chords have been added to the stream, write the stream to a MIDI file
     filename = f"./result/{chord_name}{mode}notes_{epoch}.mid"  # Construct the filename using f-string

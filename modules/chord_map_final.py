@@ -12,7 +12,7 @@ highest_note = pitch.Pitch("D5").midi
 # dictionary container for each note for the processed chord
 # contains ints that represent MIDI note value
 note_dict = dict([("root", []), ("third", []), ("fifth", []), ("seventh", [])])
-note_list = []
+
  
 '''changes the sound by entering any given semitone number'''
 def shift(note, semitones):
@@ -37,11 +37,19 @@ def prepare_note_dict(root_note, chord_type):
 
     if chord_type == '':
         third = shift(root, 4)
+        fifth = shift(root, 7)
     elif chord_type == 'm':
         third = shift(root, 3)
+        fifth = shift(root, 7)
+    
+    if 'sus4' in chord_type:
+        third = shift(root, 5)
+        fifth = shift(root, 7)
+    elif 'sus2' in chord_type:
+        third = shift(root, 2)
+        fifth = shift(root, 7)
 
-    fifth = shift(root, 7)
-
+    
     fill_dict_value(note_dict, "root", root)
     fill_dict_value(note_dict, "third", third)
     fill_dict_value(note_dict, "fifth", fifth)
