@@ -105,13 +105,12 @@ def prepare_note_dict(root_note, chord_type):
         fill_dict_value(note_dict, "third", third)
         fill_dict_value(note_dict, "fifth", fifth)
 
-    print(note_dict)    # debug print
-
-
+  
     
 '''generate the current chord based on the previous input'''
 def generate(root_note, chord_type, mode, previous_notes): # previous notes is list of pitch objects
     
+    print(f"in generate; chord is {root_note}; chord_type is {chord_type}")
     if mode == 0:  # each chordal note is only added once
         # convert previous_notes to int list
         previous_val = []
@@ -404,7 +403,7 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
                     
             bottom_root = note_dict["root"][0]
             if bottom_root in notes:
-                notes.append(shift(bottom_root,-12))
+                notes.append(bottom_root-12)
             else:
                 notes.append(bottom_root)
                 
@@ -500,13 +499,35 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
                     fourth_note = random.choice(bucket)
                     notes.append(fourth_note)
             
+            elif first_note in note_dict["seventh"]: 
+                bucket = []
+                for item in note_dict["third"]:
+                    if abs(item-first_note) <= 9:
+                        bucket.append(item)
+                second_note = random.choice(bucket)
+                notes.append(second_note)
+                
+                bucket.clear()
+                for item in note_dict["fifth"]:
+                    if abs(item-first_note) <= 9:
+                        bucket.append(item)
+                third_note = random.choice(bucket)
+                notes.append(third_note)
+                
+                bucket.clear()
+                for item in note_dict["root"]:
+                    if abs(item-first_note) <= 9:
+                        bucket.append(item)
+                if bucket != []:
+                    fourth_note = random.choice(bucket)
+                    notes.append(fourth_note)
+            
             bottom_root = note_dict['root'][0]
             if bottom_root not in notes:
                 notes.append(bottom_root)
                 
             else:
-                notes.append(shift(bottom_root,-12))
-            
+                notes.append(bottom_root-12)
                 
         note_pitches = []  
                 
