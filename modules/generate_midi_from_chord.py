@@ -1,12 +1,12 @@
-#chord_to_midi.py: １小節１コード、リズムなしのシンプルなMIDI書き出し担当
-
+#generate_midi_from_chord.py: wrapper function that writes out the MIDI file that contains input chord progressions
 
 from music21 import *
 from modules.outdated.chord_map_custom import *
 from modules.chord_map_final import *
 
+chord_history = {'symbol': None, 'notes': []}
 
-def block_chords_to_midi(chord_symbols, epoch, mode):
+def generate_midi_from_chord(chord_symbols, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
     music_stream = stream.Stream()    
     previous_notes = []
@@ -15,7 +15,7 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
                         ("bar2", chord_symbols[1]), 
                         ("bar3", chord_symbols[2]), 
                         ("bar4", chord_symbols[3])])
-      
+
     chord_name = ''
     for bar in progression.values():
         bar_mod = bar.replace("/", "")
@@ -26,9 +26,7 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
             chords_in_bar = [bar] # if there's only one chord in the bar, still make it a list
 
         for chord_symbol in chords_in_bar:
-            # process chord_symbol as before
-            print(chord_symbol)
-
+            
             # Determine the root note and the type of chord
             root_note = chord_symbol[0]
             if len(chord_symbol) == 1:
@@ -39,17 +37,21 @@ def block_chords_to_midi(chord_symbols, epoch, mode):
             else:
                 chord_type = chord_symbol[1:]
             
-            # Generate the notes for this chord
-            
-            notes = generate(root_note, chord_type, mode, previous_notes)
-            previous_notes.clear()
-            previous_notes.extend(notes)
+        # If the chord is the same as the last one, use the same notes
+            if chord_symbol == chord_history['symbol']:
+                notes = chord_history['notes']
+            else:  # Otherwise, generate new notes
+                notes = generate(root_note, chord_type, mode, previous_notes)
+                previous_notes.clear()
+                previous_notes.extend(notes)
 
-            # Create a music21 chord object with these notes
+                # Update the chord history
+                chord_history['symbol'] = chord_symbol
+                chord_history['notes'] = notes
+
             
             note_length = 4.0 / len(chords_in_bar) # apply the shifting speed of in-bar chords
-
-            c = chord.Chord(notes, duration=duration.Duration(note_length))
+            c = chord.Chord(notes, duration=duration.Duration(note_length)) # Create a music21 chord object with these notes
             # Add the chord to the stream
             music_stream.append(c)
 

@@ -1,8 +1,7 @@
 # main.py: description on code logics and algorithm
 
 import sys
-from modules.outdated.chord_map import *
-from modules.chord_to_midi import *
+from modules.generate_midi_from_chord import *
 
 '''
 sample command line: python3 main.py "G Bm A Em" 10 3
@@ -26,10 +25,10 @@ def main(chord_symbols, iter, mode):
         chord_symbols = chord_symbols.split()
 
     for epoch in range(1, iter+1):  
-        block_chords_to_midi(chord_symbols, epoch, mode)
+        generate_midi_from_chord(chord_symbols, epoch, mode)
 
 if __name__ == "__main__":
-    # getting command line; example: python3 main.py "G Bm A Em" 10 3
+    # getting command line; example: python3 main.py "G Bm A Em" 10 0
     
     chord_symbols = sys.argv[1]  # the first argument after the script name
     iter = int(sys.argv[2]) 
