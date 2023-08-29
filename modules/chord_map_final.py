@@ -4,7 +4,9 @@ from music21 import *
 from music21.pitch import Pitch
 import random
 
-
+'''
+chord_map_finalでは、渡されたコード進行(基本は1小節単位)の生成を担当します。
+'''
 
 # dictionary container for each note for the processed chord
 # contains ints that represent MIDI note value
@@ -19,9 +21,10 @@ def shift(note, semitones):
 '''fills up the value of dict's specified key'''
 def fill_dict_value(note_dict, key, note, lowest_note, highest_note):
     note_val = note
-    while note_val.midi >= lowest_note:
+    while note_val.midi >= lowest_note:     
         note_val.midi -= 12
     
+    # this way, note_dict will contain the number in order
     note_val.midi += 12
     while note_val.midi <= highest_note:
         note_dict[key].append(note_val.midi)
@@ -134,6 +137,7 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
             first_note = random.choice(note_list)
             notes.append(first_note)
             
+            # choose the rest of the notes
             if first_note in note_dict["root"]: # choosing third and fifth
                 bucket = [] # temporary container
                 
@@ -293,7 +297,8 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
                 if bucket != []:
                     fourth_note = random.choice(bucket)
                     notes.append(fourth_note)
-                
+        
+        # convert the value to MIDI-suited data
         note_pitches = []  
                 
         for note in notes:
@@ -303,6 +308,7 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
             note_pitches.append(p)
         
         return note_pitches
+    
     
     elif mode == 1:  # 4 or 5-note composition
         # convert previous_notes to int list
@@ -786,7 +792,3 @@ def generate(root_note, chord_type, mode, previous_notes): # previous notes is l
             note_pitches.append(p)
         
         return note_pitches
-        
-        
-        
-        

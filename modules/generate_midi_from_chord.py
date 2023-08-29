@@ -4,18 +4,25 @@ from music21 import *
 from modules.outdated.chord_map_custom import *
 from modules.chord_map_final import *
 
+'''
+generate_midi_from_chord()は、生成の一連の流れを管理する関数です。
+各生成イテレーションは、chord_map_finalからgenerate()を呼んでいます。
+'''
+
+# stores the previous generation history so the next iteration is smooth
 chord_history = {'symbol': None, 'notes': []}
 
 def generate_midi_from_chord(chord_symbols, epoch, mode):
     # Create a music21 stream object to hold the notes and chords
     music_stream = stream.Stream()    
-    previous_notes = []
+
     # create a dictionary
     progression = dict([("bar1", chord_symbols[0]), 
                         ("bar2", chord_symbols[1]), 
                         ("bar3", chord_symbols[2]), 
                         ("bar4", chord_symbols[3])])
-
+    previous_notes = []
+    
     chord_name = ''
     for bar in progression.values():
         bar_mod = bar.replace("/", "")
@@ -29,14 +36,14 @@ def generate_midi_from_chord(chord_symbols, epoch, mode):
             
             # Determine the root note and the type of chord
             root_note = chord_symbol[0]
-            if len(chord_symbol) == 1:
+            if len(chord_symbol) == 1: # "F", "G", etc. major chords with no accidentals
                 chord_type = ''
             elif len(chord_symbol) > 1 and (chord_symbol[1] == "#" or chord_symbol[1] == "b"):
-                root_note += chord_symbol[1]
-                chord_type = chord_symbol[2:]
+                root_note += chord_symbol[1]    # take account of the accidentals
+                chord_type = chord_symbol[2:]   # add chord symbol
             else:
                 chord_type = chord_symbol[1:]
-            
+        
         # If the chord is the same as the last one, use the same notes
             if chord_symbol == chord_history['symbol']:
                 notes = chord_history['notes']

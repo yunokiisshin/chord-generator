@@ -3,8 +3,14 @@
 import sys
 from modules.generate_midi_from_chord import *
 
+
 '''
-sample command line: python3 main.py "G Bm A Em" 10 3
+main.pyでは、入力を読み込み、関数generate_midi_from_chord()を呼ぶ部分を担当しています。
+この関数はmodules.generate_midi_from_chordからインポートしているので、仕様はそちらを参照してください。
+'''
+
+'''
+sample command line: python3 main.py "G Bm A Em" 10 1
 Parameters:
     chord_symbols - input chord progression. 
     iter          - amount of variations to be generated. Each file will contain 4-bar progression.
