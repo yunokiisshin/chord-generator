@@ -1,6 +1,7 @@
 # Chord Progression Generator
 
 This is an algorithm that creates a smooth but varying chord progression from given chord symbols.
+I am also practicing the proper git usage.
 
 
 ## Requirements
