@@ -31,7 +31,7 @@ def main(chord_symbols, iter, mode):
         chord_symbols = chord_symbols.split()
 
     for epoch in range(1, iter+1):  
-        generate_midi_from_chord(chord_symbols, epoch, mode)
+        generate_midi_from_chord(chord_symbols, epoch=1, mode=1)
 
 if __name__ == "__main__":
     # getting command line; example: python3 main.py "G Bm A Em" 10 0

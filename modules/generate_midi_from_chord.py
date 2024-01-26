@@ -12,7 +12,7 @@ generate_midi_from_chord()は、生成の一連の流れを管理する関数で
 # stores the previous generation history so the next iteration is smooth
 chord_history = {'symbol': None, 'notes': []}
 
-def generate_midi_from_chord(chord_symbols, epoch, mode):
+def generate_midi_from_chord(chord_symbols, epoch=1, mode=1):
     # Create a music21 stream object to hold the notes and chords
     music_stream = stream.Stream()    
 
